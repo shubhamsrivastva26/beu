@@ -42,5 +42,5 @@ RUN chmod +x /app/start.sh
 # Expose port 5000 for Flask/Gunicorn
 EXPOSE 5000
 
-# Start Xvfb (Virtual Display) and then run Gunicorn
-CMD ["./start.sh"]
+# Run Gunicorn directly
+CMD ["gunicorn", "app:app", "--workers", "1", "--bind", "0.0.0.0:5000", "--timeout", "60"]
