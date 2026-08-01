@@ -3,3 +3,4 @@ flask-cors
 selenium
 webdriver-manager
 gunicorn
+pyvirtualdisplay

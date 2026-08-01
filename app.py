@@ -8,6 +8,15 @@ import time
 import json
 import threading
 from flask_cors import CORS
+import os
+
+try:
+    from pyvirtualdisplay import Display
+    display = Display(visible=0, size=(1280, 1024))
+    display.start()
+    print("Xvfb Virtual Display Started Successfully!")
+except Exception as e:
+    print("Warning: Could not start pyvirtualdisplay. (If on Windows, ignore this)", e)
 
 app = Flask(__name__)
 CORS(app)
