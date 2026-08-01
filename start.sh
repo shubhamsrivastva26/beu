@@ -1,11 +1,4 @@
 #!/bin/bash
-# Start Xvfb virtual display in the background
-# This gives Chrome a fake "screen" so Turnstile thinks it's a real desktop
-Xvfb :99 -screen 0 1280x1024x24 &
-export DISPLAY=:99
-
-# Give Xvfb a second to initialize
-sleep 1
 
 # Start the Flask app using Gunicorn for production
 # We use 1 worker because the Selenium driver is a singleton

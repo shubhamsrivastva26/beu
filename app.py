@@ -8,15 +8,6 @@ import time
 import json
 import threading
 from flask_cors import CORS
-import os
-
-try:
-    from pyvirtualdisplay import Display
-    display = Display(visible=0, size=(1280, 1024))
-    display.start()
-    print("Xvfb Virtual Display Started Successfully!")
-except Exception as e:
-    print("Warning: Could not start pyvirtualdisplay. (If on Windows, ignore this)", e)
 
 app = Flask(__name__)
 CORS(app)
@@ -30,10 +21,11 @@ def get_driver():
     if driver is None:
         print("Initializing Global Chrome Browser...")
         chrome_options = Options()
+        chrome_options.add_argument("--headless=new")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        # IMPORTANT: Do not use headless so Turnstile passes. Xvfb will handle display in Docker.
+        chrome_options.add_argument("--window-size=1280,1024")
         
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=chrome_options)
